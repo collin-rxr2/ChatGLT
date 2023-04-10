@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" href="./icons/favicon.ico">
+    <title>ChatGLT</title>
+    <script>
+    window.onload=function(){
+      message_object = document.getElementById("message_input");
+      message_object.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        document.getElementById("send").click();
+      }
+    });
+    }
+    
+    function send() {
+      messages = document.getElementById("messages");
+      message = document.getElementById("message_input").value;
+      title = document.getElementById("title");
+      message_encoded = encodeURIComponent(document.getElementById("message_input").value);
+      console.log("a")
+      if (message) {
+        console.log("b")
+        if(title){
+          title.remove();
+        }
+        messages.innerHTML += '<p class="user">User: '+message+'</p>';
+        document.getElementById("message_input").value =  "";
+        fetch("https://api.betterapi.net/youdotcom/chat?message="+message_encoded+"&key=site").then(function(response) {
+          return response.json();
+        }).then(function(data) {
+          messages.innerHTML += '<p class="output">ChatGLT: '+data["message"]+'</p>';
+        }).catch(function(err) {
+          console.log('Fetch Error :-S', err);
+        });
+      }
+    }
+
+    </script>
+  </head>
+  <body>
+    <div id="title">
+      <h1>ChatGLT</h1>
+    </div>
+    <div id="messages"></div>
+    <div class="input">
+      <input type="text" id="message_input" placeholder="Send a message..."></input>
+      <button onclick="send();" class="send" id="send"><img src="./icons/send.svg" class="sendimg"></img></button>
+    </div>
+  </body>
+</html>
