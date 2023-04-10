@@ -53,6 +53,12 @@ body {
   padding: 1.5rem;
 }
 
+.error {
+  background-color: #454655;
+  color: #ff0000;
+  padding: 1.5rem;
+}
+
 #title {
   margin-top: 5rem;
 }
