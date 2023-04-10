@@ -34,7 +34,7 @@
         fetch("https://api.betterapi.net/youdotcom/chat?message="+message_encoded+"&key=site").then(function(response) {
           return response.json();
         }).then(function(data) {
-          if (data["message"] == "undefined"){
+          if (data["message"] !== "undefined"){
             messages.innerHTML += '<p class="output">ChatGLT: '+data["message"]+'</p>';
           } else {
             messages.innerHTML += '<p class="error">An Error occured.</p>';
