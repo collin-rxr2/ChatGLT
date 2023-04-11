@@ -37,13 +37,8 @@
         fetch("https://api.betterapi.net/youdotcom/chat?message="+message_encoded+"&key=site").then(function(response) {
           return response.json();
         }).then(function(data) {
-          if (data["message"]){
-            messages.innerHTML += '<p class="output">ChatGLT: '+data["message"]+'</p>';
-            window.scrollTo(0, document.body.scrollHeight);
-          } else {
-            messages.innerHTML += '<p class="error">An Error occured.</p>';
-            window.scrollTo(0, document.body.scrollHeight);
-          }
+           messages.innerHTML += '<p class="output">ChatGLT: '+data["message"]+'</p>';
+           window.scrollTo(0, document.body.scrollHeight);
         }).catch(function(err) {
           console.log('Fetch Error :-S', err);
         });
